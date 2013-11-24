@@ -24,7 +24,7 @@ object Main {
     // Creation.from(Range(1,10).inclusive).subscribe(println(_))
     // Creation.startWith(Observable(4,5,6), 0, 1, 2, 3).subscribe(println(_))
     // Creation.filter(Observable(Range(1,10).inclusive), (x: Int) => x%2 == 0).subscribe(println(_))
-    // Creation.map(Observable(Range(1,10).inclusive), (x: Int) => x*2).subscribe(println(_))
+    Creation.map(Observable(Range(1,10).inclusive), (x: Int) => x*2).subscribe(println(_))
   }
 
 }

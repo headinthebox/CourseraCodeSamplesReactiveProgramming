@@ -1,14 +1,11 @@
 package coursera.geocode
 
-<<<<<<< HEAD
 import retrofit.http.{Query, GET}
 import retrofit.{RetrofitError, RestAdapter, Callback}
 import scala.concurrent.{Promise, Future}
-=======
 import retrofit.http.{Query, Path, GET}
 import retrofit.{RetrofitError, RestAdapter, Callback}
 import scala.concurrent.{ExecutionContext, Promise, Future}
->>>>>>> f75c8cbe5585da5c05d5d5f7a7aa8923f1f74451
 import retrofit.client.Response
 import coursera.usgs.Point
 
