@@ -1,12 +1,9 @@
 import coursera.adventure.unsafe.Adventure
-<<<<<<< HEAD
 import coursera.rx._
 import coursera.usgs.{Magnitude, Usgs}
 import rx.lang.scala.Observable
-=======
 import coursera.rx.{Subscriptions, EarthQuakes, Nested, Quizzes}
 import coursera.usgs.{Magnitude, Usgs}
->>>>>>> f75c8cbe5585da5c05d5d5f7a7aa8923f1f74451
 
 object Main {
   def main(args: Array[String]): Unit = {
