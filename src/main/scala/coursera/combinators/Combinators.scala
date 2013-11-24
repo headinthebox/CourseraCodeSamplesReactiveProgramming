@@ -7,7 +7,7 @@ import coursera.extensions._
 
 package object combinators {
 
-  def retryI[T](n: Integer)(block: =>Future[T]): Future[T] = {
+  def retryI[T](n: Int)(block: =>Future[T]): Future[T] = {
     if (n == 0) {
       Future.failed(new Exception("Sorry"))
     } else {
@@ -15,14 +15,14 @@ package object combinators {
     }
   }
 
-  def retryII[T](n: Integer)(block: =>Future[T]): Future[T] = {
+  def retryII[T](n: Int)(block: =>Future[T]): Future[T] = {
     val ns: Iterator[Int] = (1 to n).iterator
     val attempts: Iterator[()=>Future[T]] = ns.map(_ => ()=>block)
     val failed: Future[T] = Future.failed(new Exception)
     attempts.foldLeft(failed)((a, block) => a fallbackTo { block() })
   }
 
-  def retryIII[T](n: Integer)(block: =>Future[T]): Future[T] = {
+  def retryIII[T](n: Int)(block: =>Future[T]): Future[T] = {
     val ns: Iterator[Int] = (1 to n).iterator
     val attempts: Iterator[()=>Future[T]] = ns.map(_ => ()=>block)
     val failed: Future[T] = Future.failed(new Exception)
@@ -30,7 +30,7 @@ package object combinators {
   }
 
   def retryIV[T](n: Int)(block: =>Future[T])(implicit executor: ExecutionContext): Future[T] = async {
-    var i: Integer = 0
+    var i: Int = 0
     var result: Try[T] = Failure(new Exception("Oops"))
 
     while (i < n) {

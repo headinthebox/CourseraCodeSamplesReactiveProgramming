@@ -6,7 +6,7 @@ import scala.util.{Failure, Success, Try}
 package object extensions {
 
   implicit class ListExtensions[T](val source: List[T]) extends AnyVal {
-    def sumBy(keySelector: T => Integer): Integer = ???
+    def sumBy(keySelector: T => Int): Int = ???
 
     private def sumBy[B](keySelector: T => B)(implicit num: Numeric[B]): B = {
         source.map(keySelector).sum

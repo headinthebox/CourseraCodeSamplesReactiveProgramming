@@ -15,7 +15,7 @@ object Subjects {
    */
   def PublishSubjectIsAChannel() {
 
-    val channel = PublishSubject[Integer](0)  // bug
+    val channel = PublishSubject[Int](0)  // bug
     val a = channel.subscribe(x => println(s"Apple: $x"), e => println(s"Apple~ $e"), () => println(s"Apple."))
     val b = channel.subscribe(x => println(s"Banana: $x"), e => println(s"Banana~ $e"), () => println(s"Banana."))
 
@@ -44,7 +44,7 @@ object Subjects {
    */
   def ReplaySubjectIsAChannel() {
 
-    val channel = ReplaySubject[Integer]()
+    val channel = ReplaySubject[Int]()
     val a = channel.subscribe(x => println(s"Apple: $x"), e => println(s"Apple~ $e"), () => println(s"Apple."))
     val b = channel.subscribe(x => println(s"Banana: $x"), e => println(s"Banana~ $e"), () => println(s"Banana."))
 
@@ -98,7 +98,7 @@ object Subjects {
    */
   def AsyncSubjectIsAFuture() {
 
-    val channel = AsyncSubject[Integer]()
+    val channel = AsyncSubject[Int]()
     val a = channel.subscribe(x => println(s"Apple: $x"), e => println(s"Apple~ $e"), () => println(s"Apple."))
     val b = channel.subscribe(x => println(s"Banana: $x"), e => println(s"Banana~ $e"), () => println(s"Banana."))
 
