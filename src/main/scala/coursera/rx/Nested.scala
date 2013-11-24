@@ -1,7 +1,7 @@
 package coursera.rx
 
 import rx.lang.scala.Observable
-import scala.languageFeature.postfixOps._
+import scala.language.postfixOps
 import scala.concurrent.duration._
 
 object Nested {

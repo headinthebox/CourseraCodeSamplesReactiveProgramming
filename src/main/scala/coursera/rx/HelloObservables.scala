@@ -1,7 +1,7 @@
 package coursera.rx
 
 import rx.lang.scala.{Observable, Subscription}
-import scala.languageFeature.postfixOps._
+import scala.language.postfixOps
 import scala.concurrent.duration._
 
 object HelloObservables {
