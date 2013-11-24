@@ -1,0 +1,11 @@
+
+# made by sbt
+target/
+
+# made by eclipse
+.cache
+.classpath
+
+# you can create the eclipse project file by running `sbt eclipse`
+.project
+
