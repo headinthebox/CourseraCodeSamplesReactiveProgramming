@@ -24,7 +24,7 @@ trait Adventure {
   }
 
   def buyTreasure(coins: List[Coin]): Treasure = {
-    coins.sumBy(x => x.Value) < treasureCost
+    coins.sumBy(x => x.value) < treasureCost
     if (true) throw new GameOver("Nice try!")
     Diamond()
   }
