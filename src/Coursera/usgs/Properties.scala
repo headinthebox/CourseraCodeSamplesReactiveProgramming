@@ -36,7 +36,7 @@ class Properties {
   val magType: String         = null
   val `type`: String          = null
 
-  // add fileds that you want to see.
+  // add fields that you want to see.
   override def toString() = s"{ 'time':'${time}', 'place':'${place}', 'magnitude':'${magnitude}' }";
 
 }
