@@ -2,6 +2,8 @@ package coursera.rx
 
 import rx.lang.scala._
 import rx.lang.scala.subscriptions._
+import scala.concurrent.{ExecutionContext, Future}
+import scala.async.Async._
 
 object Creation {
 
@@ -89,5 +91,9 @@ object Creation {
         }
       }
     }
+  }
+
+  def map[T,R](source: Future[T], selector: T=>R)(implicit executor: ExecutionContext): Future[R] = async {
+    selector(await{ source })
   }
 }
