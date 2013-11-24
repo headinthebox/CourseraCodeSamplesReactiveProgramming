@@ -6,6 +6,7 @@ import scala.concurrent.duration._
 import org.junit.Test
 import org.scalatest.junit.JUnitSuite
 import org.junit.Assert._
+import coursera.Utils._
 
 class Nested extends JUnitSuite {
  
@@ -31,6 +32,26 @@ class Nested extends JUnitSuite {
     val zs = yss.concat
 
     assertEquals(List(3, 3, 2, 2, 1, 1), zs.toBlockingObservable.toList)
+  }
+  
+  /**
+   * The marble diagram on the slides is not entirely correct, but the final Observable zs is correct.
+   * Interested students can investigate what happens in between using this test.
+   * The difference is that Observable.interval produces a cold Observable, which only starts emitting
+   * values once concat subscribes to it. So there is no buffering here, and concat is only subscribed
+   * to one inner observable at the same time. 
+   */
+  @Test def concatenateNestedStreamsWhatIsReallyGoingOn() {
+    val t0 = System.currentTimeMillis
+    
+    val xs: Observable[Int] = Observable(3, 2, 1)
+    val yss: Observable[Observable[Int]] =
+      xs map { x => Observable.interval(x seconds).doOnEach(
+        n => println(f"${(System.currentTimeMillis-t0)/1000.0}%.3f:Observable.interval($x seconds) emits $n")
+      ).map(_ => x).take(2) }
+    val zs: Observable[Int] = yss.concat
+    
+    displayObservable(zs)
   }
 
 }
