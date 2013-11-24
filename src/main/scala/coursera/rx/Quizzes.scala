@@ -1,15 +1,17 @@
 package coursera.rx
 
 import rx.lang.scala.Observable
+import org.junit.Test
+import org.scalatest.junit.JUnitSuite
+import org.junit.Assert._
 
-object Quizzes {
+class Quizzes extends JUnitSuite {
 
-  def quizI(): Unit = {
+  @Test def quizI(): Unit = {
 
-    val xs = Observable(Range(1,10).inclusive)
+    val xs = Observable(1 to 10)
     val ys = xs.map(x => x+1)
 
-    println(ys.toBlockingObservable.toList.equals(List(2,3,4,5,6,7,8,9,10,11)))
-
+    assertEquals(List(2,3,4,5,6,7,8,9,10,11), ys.toBlockingObservable.toList)
   }
 }

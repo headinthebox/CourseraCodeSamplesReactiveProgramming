@@ -3,10 +3,13 @@ package coursera.rx
 import rx.lang.scala.{Observable, Subscription}
 import scala.language.postfixOps
 import scala.concurrent.duration._
+import org.junit.Test
+import org.scalatest.junit.JUnitSuite
 
-object HelloObservables {
 
-  def ticks(): Unit = {
+class HelloObservables extends JUnitSuite {
+
+  @Test def ticks(): Unit = {
 
     val ticks: Observable[Long]        = Observable.interval(1 second)
     val evens: Observable[Long]        = ticks.filter(s => s%2 == 0)

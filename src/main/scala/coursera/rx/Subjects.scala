@@ -1,8 +1,12 @@
 package coursera.rx
 
+import org.junit.Test
+import org.scalatest.junit.JUnitSuite
+import org.junit.Assert._
 import rx.lang.scala.subjects.{BehaviorSubject, AsyncSubject, ReplaySubject, PublishSubject}
 
-object Subjects {
+
+class Subjects extends JUnitSuite {
 
   /*
   Banana: 42
@@ -13,9 +17,9 @@ object Subjects {
 
   Cranberry.
    */
-  def PublishSubjectIsAChannel() {
+  @Test def PublishSubjectIsAChannel() {
 
-    val channel = PublishSubject[Int](0)  // bug
+    val channel = PublishSubject[Int](0)  // bug, should be PublishSubject[Int]() 
     val a = channel.subscribe(x => println(s"Apple: $x"), e => println(s"Apple~ $e"), () => println(s"Apple."))
     val b = channel.subscribe(x => println(s"Banana: $x"), e => println(s"Banana~ $e"), () => println(s"Banana."))
 
@@ -42,7 +46,7 @@ object Subjects {
   Cranberry: 4711
   Cranberry.
    */
-  def ReplaySubjectIsAChannel() {
+  @Test def ReplaySubjectIsAChannel() {
 
     val channel = ReplaySubject[Int]()
     val a = channel.subscribe(x => println(s"Apple: $x"), e => println(s"Apple~ $e"), () => println(s"Apple."))
@@ -72,7 +76,7 @@ object Subjects {
 
   Cranberry.
    */
-  def BehaviorSubjectIsACache() {
+  @Test def BehaviorSubjectIsACache() {
 
     val channel = BehaviorSubject(2013)
     val a = channel.subscribe(x => println(s"Apple: $x"), e => println(s"Apple~ $e"), () => println(s"Apple."))
@@ -96,7 +100,7 @@ object Subjects {
   Cranberry: 4711
   Cranberry.
    */
-  def AsyncSubjectIsAFuture() {
+  @Test def AsyncSubjectIsAFuture() {
 
     val channel = AsyncSubject[Int]()
     val a = channel.subscribe(x => println(s"Apple: $x"), e => println(s"Apple~ $e"), () => println(s"Apple."))
