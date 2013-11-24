@@ -27,7 +27,8 @@ object Main {
     // Creation.map(Observable(Range(1,10).inclusive), (x: Int) => x*2).subscribe(println(_))
     // Subjects.PublishSubjectIsAChannel()
     // Subjects.ReplaySubjectIsAChannel()
-    Subjects.AsyncSubjectIsAFuture()
+    // Subjects.AsyncSubjectIsAFuture()
+    // Subjects.BehaviorSubjectIsACache()
   }
 
 }
