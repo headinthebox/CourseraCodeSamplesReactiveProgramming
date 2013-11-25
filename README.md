@@ -24,7 +24,7 @@ When in doubt, consult the code samples here for the correct code.
 
 ### Running the examples
 
-You can build and run some of the examples with sbt and Eclipse.
+You can build and run some of the examples with sbt and Eclipse or sbt and IntelliJ.
 
 With sbt only: In the sbt console, execute `test-only <name of the test you want to run>`,
 for instance `test-only coursera.rx.Subscriptions`.
@@ -32,6 +32,5 @@ for instance `test-only coursera.rx.Subscriptions`.
 With sbt+Eclipse: In the sbt console, execute `eclipse`, then import the project into eclipse,
 right-click the name of the test you're interested in, and choose "Run As" > "Scala JUnit Test".
 
-It would be great if someone that knows about sbt+IntelliJ to add support for that as well.
-
-
+With sbt+IntelliJ: In the sbt console, execute `gen-idea`, then open the project in IntelliJ,
+right-click the name of the test you're interested in, and choose "Run '_TestName_'".
