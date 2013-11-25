@@ -3,10 +3,13 @@
 target/
 
 # made by eclipse
+# you can create the eclipse project file by running `sbt eclipse`
 .cache
 .classpath
+.project
 .settings
 
-# you can create the eclipse project file by running `sbt eclipse`
-.project
-
+# made by idea
+# you can create the intellij idea project file by running `sbt gen-idea`
+.idea
+.idea_modules
