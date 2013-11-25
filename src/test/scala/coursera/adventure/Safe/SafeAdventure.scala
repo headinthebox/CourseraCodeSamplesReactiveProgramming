@@ -6,14 +6,14 @@ import scala.util.{Failure, Success, Try}
 object Adventure {
   def apply(): Adventure = new Adventure(){
     var eatenByMonster: Boolean = true
-    val treasureCost: Integer = 42
+    val treasureCost: Int = 42
   }
 }
 
 trait Adventure {
 
   var eatenByMonster: Boolean
-  val treasureCost: Integer
+  val treasureCost: Int
 
   def collectCoins(): Try[List[Coin]] = ???
 

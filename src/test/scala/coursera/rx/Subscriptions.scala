@@ -1,10 +1,13 @@
 package coursera.rx
 
 import rx.lang.scala.subscriptions._
+import org.scalatest.junit.JUnitSuite
+import org.junit.Assert._
+import org.junit.Test
 
-object Subscriptions {
+class Subscriptions extends JUnitSuite {
 
-  def FishingI(): Unit = {
+  @Test def FishingI(): Unit = {
 
    val subscription = Subscription{
      println("Bye, bye, I'm out fishing")
@@ -16,7 +19,7 @@ object Subscriptions {
    subscription.unsubscribe()
  }
 
-  def FishingII(): Unit = {
+  @Test def FishingII(): Unit = {
 
     val subscription = BooleanSubscription{
       println("Bye, bye, I'm out fishing as well")
@@ -28,7 +31,7 @@ object Subscriptions {
     subscription.unsubscribe()
   }
 
-  def Composite(): Unit = {
+  @Test def Composite(): Unit = {
     val a = BooleanSubscription { println("Apple") }
     val b = Subscription { println("Banana") }
     val c = Subscription{ println ("Cranberry") }
@@ -49,7 +52,7 @@ object Subscriptions {
 
   }
 
-  def Multi(): Unit = {
+  @Test def Multi(): Unit = {
     val a = BooleanSubscription { println("Apple") }
     val b = Subscription { println("Banana") }
     val c = Subscription{ println ("Cranberry") }
