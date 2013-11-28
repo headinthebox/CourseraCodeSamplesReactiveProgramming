@@ -2,9 +2,7 @@ import coursera.adventure.unsafe.Adventure
 import coursera.rx._
 import coursera.usgs.{Magnitude, Usgs}
 import rx.lang.scala.Observable
-import coursera.rx.{Subscriptions, EarthQuakes, Nested, Quizzes}
-import coursera.usgs.{Magnitude, Usgs}
-import rx.lang.scala.subjects.AsyncSubject
+import rx.lang.scala.subjects._
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -26,7 +24,7 @@ object Main {
     // Creation.startWith(Observable(4,5,6), 0, 1, 2, 3).subscribe(println(_))
     // Creation.filter(Observable(Range(1,10).inclusive), (x: Int) => x%2 == 0).subscribe(println(_))
     // Creation.map(Observable(Range(1,10).inclusive), (x: Int) => x*2).subscribe(println(_))
-    // Subjects.PublishSubjectIsAChannel()
+    // coursera.rx.Subjects.PublishSubjectIsAChannel()
     // Subjects.ReplaySubjectIsAChannel()
     // Subjects.AsyncSubjectIsAFuture()
     // Subjects.BehaviorSubjectIsACache()
