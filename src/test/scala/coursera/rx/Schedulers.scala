@@ -85,7 +85,7 @@ class Schedulers extends JUnitSuite {
   }
 
   /**
-  * In the slides this is defined as factory method on Observable.
+  * In the slides this is defined as factory method on Observable in the quiz.
   * Perhaps the easiest way to use schedulers in scenarios like the above.
   */
   def SchedulerToObservable()(implicit scheduler: Scheduler): Observable[Unit] = {
