@@ -102,4 +102,6 @@ package object combinators {
 
     p.future
   }
+
+  def never[T]()(implicit executor: ExecutionContext): Future[T] = { Promise[T].future }
 }

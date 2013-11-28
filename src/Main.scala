@@ -4,6 +4,7 @@ import coursera.usgs.{Magnitude, Usgs}
 import rx.lang.scala.Observable
 import coursera.rx.{Subscriptions, EarthQuakes, Nested, Quizzes}
 import coursera.usgs.{Magnitude, Usgs}
+import rx.lang.scala.subjects.AsyncSubject
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -30,6 +31,7 @@ object Main {
     // Subjects.AsyncSubjectIsAFuture()
     // Subjects.BehaviorSubjectIsACache()
     // Blocking.dontDoThisAtHomeKids()
+
   }
 
 }

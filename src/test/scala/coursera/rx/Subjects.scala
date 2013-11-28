@@ -19,7 +19,7 @@ class Subjects extends JUnitSuite {
    */
   @Test def PublishSubjectIsAChannel() {
 
-    val channel = PublishSubject[Int](0)  // bug, should be PublishSubject[Int]() 
+    val channel = PublishSubject[Int]()
     val a = channel.subscribe(x => println(s"Apple: $x"), e => println(s"Apple~ $e"), () => println(s"Apple."))
     val b = channel.subscribe(x => println(s"Banana: $x"), e => println(s"Banana~ $e"), () => println(s"Banana."))
 
