@@ -2,11 +2,8 @@ package test.scala.coursera.rx
 
 import rx.lang.scala.{Scheduler, Subscription, Observable}
 import scala.language.postfixOps
-import scala.concurrent.duration._
 import org.junit.Test
 import org.scalatest.junit.JUnitSuite
-import org.junit.Assert._
-import coursera.Utils._
 
 class Schedulers extends JUnitSuite {
 
@@ -51,7 +48,10 @@ class Schedulers extends JUnitSuite {
   }
 
   /**
-   * Th
+   * Don't count on this to work!
+   * The only guarantee you get is that you can cancel the work
+   * between it gets scheduled and before it gets run.
+   * (RxJava goes out of the way to make it stop)
    */
   @Test def attemptII(): Unit = {
     val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
@@ -86,7 +86,8 @@ class Schedulers extends JUnitSuite {
 
   /**
   * In the slides this is defined as factory method on Observable in the quiz.
-  * Perhaps the easiest way to use schedulers in scenarios like the above.
+  * Perhaps the easiest way to use schedulers in scenarios like the above,
+  * since you can directly subscribe to the scheduler.
   */
   def SchedulerToObservable()(implicit scheduler: Scheduler): Observable[Unit] = {
       Observable(observer => {
