@@ -50,14 +50,36 @@ class Schedulers extends JUnitSuite {
     subscription.unsubscribe()
   }
 
-  @Test(timeout=10) def attemptII(): Unit = {
+  @Test def attemptII(): Unit = {
     val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
     val nats: Observable[Integer] = Observable(observer => {
       scheduler.schedule{ from(0).foreach(observer.onNext(_)) }
     })
+
     val subscription = nats.subscribe(println(_))
     subscription.unsubscribe()
     println("You won the lottery")
+  }
+
+  // warning: does not catch exceptions and send to onError
+  @Test def attemptIII(): Unit = {
+    val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
+    val nats: Observable[Integer] = Observable(observer => {
+      val iterator = from(0).iterator
+      scheduler.scheduleRec(self => {
+
+        if(iterator.hasNext) {
+          observer.onNext(iterator.next()); self
+        } else {
+          observer.onCompleted()
+        }
+
+      })
+    })
+    val subscription = nats.subscribe(println(_))
+    //Thread.sleep(5)
+    subscription.unsubscribe()
+    println("we made it work!")
   }
 
 
