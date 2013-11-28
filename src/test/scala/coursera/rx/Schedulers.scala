@@ -50,6 +50,9 @@ class Schedulers extends JUnitSuite {
     subscription.unsubscribe()
   }
 
+  /**
+   * Th
+   */
   @Test def attemptII(): Unit = {
     val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
     val nats: Observable[Integer] = Observable(observer => {
@@ -77,11 +80,22 @@ class Schedulers extends JUnitSuite {
       })
     })
     val subscription = nats.subscribe(println(_))
-    //Thread.sleep(5)
     subscription.unsubscribe()
     println("we made it work!")
   }
 
+  /**
+  * In the slides this is defined as factory method on Observable.
+  * Perhaps the easiest way to use schedulers in scenarios like the above.
+  */
+  def SchedulerToObservable()(implicit scheduler: Scheduler): Observable[Unit] = {
+      Observable(observer => {
+        scheduler.scheduleRec(self => {
+          observer.onNext()
+          self
+        })
+      })
+  }
 
 }
 
