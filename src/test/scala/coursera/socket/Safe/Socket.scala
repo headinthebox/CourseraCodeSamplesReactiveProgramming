@@ -39,8 +39,8 @@ trait Socket {
 
   def sendToSafeI(packet: Array[Byte]): Future[Array[Byte]] =
     sendTo("...europe...", packet) recoverWith {
-      case europeError ⇒ sendTo("...usa...", packet) recover {
-        case usaError  ⇒ usaError.getMessage.getBytes
+      case europeError => sendTo("...usa...", packet) recover {
+        case usaError  => usaError.getMessage.getBytes
       }
     }
 
