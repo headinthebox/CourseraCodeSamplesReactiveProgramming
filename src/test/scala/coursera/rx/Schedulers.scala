@@ -1,4 +1,4 @@
-package test.scala.coursera.rx
+package coursera.rx
 
 import rx.lang.scala.{Scheduler, Subscription, Observable}
 import scala.language.postfixOps
