@@ -103,6 +103,13 @@ class Schedulers extends JUnitSuite {
       })
   }
 
+  @Test def unitObservable() {
+    implicit val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
+    val observable = SchedulerToObservable()
+    observable.subscribe(u => println("unit"))
+    println("unitObservable out")
+  }
+
   def scheduleRec(outer: Scheduler, work: (=>Unit)=>Unit): Subscription = {
     val subscription = rx.lang.scala.subscriptions.MultipleAssignmentSubscription()
     outer.schedule(s => {
@@ -131,6 +138,21 @@ class Schedulers extends JUnitSuite {
 
   }
 
+  def range(start: Int, count: Int)(implicit s: Scheduler): Observable[Int] = {
+    Observable(observer => {
+      var i = 0
+      SchedulerToObservable().subscribe(u => {
+        if (i < count) { observer.onNext(start + i); i += 1 }
+        else { observer.onCompleted() }
+      })
+    })
+  }
+
+  @Test def range() {
+    implicit val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
+    val xs = range(1, 10)
+    xs.subscribe(x => println(x))
+    println("range out")
+  }
+
 }
-
-
