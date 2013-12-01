@@ -6,7 +6,6 @@ import ExecutionContext.Implicits.global
 import scala.collection.immutable.Queue
 import akka.serialization._
 import coursera.socket.EmailMessage
-import scala.imaginary.Http.{Http, Request}
 
 object Socket {
   def apply(): Socket = new Socket(){}
