@@ -1,4 +1,4 @@
-package scala.imaginary.Http {
+package coursera.socket.safe {
 
 import scala.concurrent.Future
 
