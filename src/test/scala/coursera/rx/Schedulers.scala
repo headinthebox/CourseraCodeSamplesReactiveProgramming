@@ -1,10 +1,15 @@
 package coursera.rx
 
-import rx.lang.scala.{Scheduler, Subscription, Observable}
+import rx.lang.scala.{Observable, Scheduler, Subscription}
 import scala.language.postfixOps
 import org.junit.Test
 import org.scalatest.junit.JUnitSuite
 
+/**
+ * Since several of the sample function below run on their own thread,
+ * or run forever, add @Test by hand in front of the functions you want study.
+ * It is best to only have one test enabled.
+ */
 class Schedulers extends JUnitSuite {
 
   def fromIterableBad[T](seq: Iterable[T]) : Observable[T] = {
@@ -32,13 +37,13 @@ class Schedulers extends JUnitSuite {
     }
   }
 
-//  @Test(timeout=1) def attemptI(): Unit = {
-//    val nats: Observable[Integer] = fromIterableBad(from(0))
-//    val subscription = nats.subscribe(println(_))
-//    subscription.unsubscribe()
-//  }
+  def attemptI(): Unit = {
+    val nats: Observable[Integer] = fromIterableBad(from(0))
+    val subscription = nats.subscribe(println(_))
+    subscription.unsubscribe()
+  }
 
-  @Test def helloScheduler(): Unit = {
+  def helloScheduler(): Unit = {
     val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
     println(s"running on ${Thread.currentThread().getName}")
     val subscription = scheduler.schedule{
@@ -53,7 +58,7 @@ class Schedulers extends JUnitSuite {
    * between it gets scheduled and before it gets run.
    * (RxJava goes out of the way to make it stop)
    */
-  @Test def attemptII(): Unit = {
+  def attemptII(): Unit = {
     val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
     val nats: Observable[Integer] = Observable(observer => {
       scheduler.schedule{ from(0).foreach(observer.onNext(_)) }
@@ -65,7 +70,7 @@ class Schedulers extends JUnitSuite {
   }
 
   // warning: does not catch exceptions and send to onError
-  @Test def attemptIII(): Unit = {
+  def attemptIII(): Unit = {
     val scheduler: Scheduler = rx.lang.scala.concurrency.Schedulers.newThread
     val nats: Observable[Integer] = Observable(observer => {
       val iterator = from(0).iterator
@@ -96,6 +101,34 @@ class Schedulers extends JUnitSuite {
           self
         })
       })
+  }
+
+  def scheduleRec(outer: Scheduler, work: (=>Unit)=>Unit): Subscription = {
+    val subscription = rx.lang.scala.subscriptions.MultipleAssignmentSubscription()
+    outer.schedule(s => {
+      def loop(): Unit = {
+        subscription.subscription = s.schedule {
+          work { loop() } }
+      }
+      loop()
+      subscription
+    })
+    subscription
+  }
+
+  @Test def comeOnBabyOneMoreTime(): Unit = {
+
+    val ns = (Observable(observer =>  {
+      var n = 0
+      scheduleRec(rx.lang.scala.concurrency.Schedulers.newThread, self => {
+         observer.onNext(n); n += 1
+         self
+      })}): Observable[Integer]).take(5)
+
+    ns.subscribe(println(_))
+
+    Thread.sleep(1000)
+
   }
 
 }

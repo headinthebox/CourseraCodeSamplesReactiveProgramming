@@ -1,8 +1,11 @@
 import coursera.adventure.unsafe.Adventure
 import coursera.rx._
 import coursera.usgs.{Magnitude, Usgs}
-import rx.lang.scala.Observable
+import rx.lang.scala.{Scheduler, Observable}
 import rx.lang.scala.subjects._
+
+import scala.language.postfixOps
+import scala.concurrent.duration._
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -29,6 +32,8 @@ object Main {
     // Subjects.AsyncSubjectIsAFuture()
     // Subjects.BehaviorSubjectIsACache()
     // Blocking.dontDoThisAtHomeKids()
+
+
 
   }
 

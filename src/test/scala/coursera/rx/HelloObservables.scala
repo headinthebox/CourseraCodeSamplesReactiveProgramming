@@ -5,6 +5,7 @@ import scala.language.postfixOps
 import scala.concurrent.duration._
 import org.junit.Test
 import org.scalatest.junit.JUnitSuite
+import scala.concurrent.Promise
 
 
 class HelloObservables extends JUnitSuite {
