@@ -48,7 +48,7 @@ package object combinators {
   def filterI[T](future: Future[T], predicate: T => Boolean)(implicit executor: ExecutionContext): Future[T] = async{
     val x: T = await{ future }
     if(!predicate(x)) {
-      throw new Exception("No such element")
+      throw new NoSuchElementException("No such element")
     } else {
       x
     }
@@ -59,7 +59,7 @@ package object combinators {
     future.onComplete {
       case Success(s) => {
         if(!predicate(s)) {
-          p.failure(new Exception("No such element"))
+          p.failure(new NoSuchElementException("No such element"))
         } else {
           p.success(s)
         }
