@@ -29,7 +29,7 @@ object Utils {
   def notificationToString[T](n: Notification[T]): String = n match {
     case Notification.OnNext(value) => s"OnNext($value)"
     case Notification.OnError(err) => s"OnError($err)"
-    case Notification.OnCompleted() => "OnCompleted()"
+    case Notification.OnCompleted(()) => "OnCompleted()"
   }
   
   implicit class ExtendedObservable[T](o: Observable[T]) {
