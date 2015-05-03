@@ -37,8 +37,8 @@ package object combinators {
       result = await { block.withTry() }
 
       result match {
-        case Success(s) => { i = i+1  }
-        case Failure(f) => { i = n    }
+        case Success(s) => { i = n }
+        case Failure(f) => { i += 1 }
       }
     }
 
